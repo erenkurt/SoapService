@@ -1,0 +1,7 @@
+﻿Insert Into CARI(BLKODU,CARIKODU,KAYIT_TARIHI,ADI,SOYADI,TICARI_UNVANI,VERGI_DAIRESI,VERGI_NO,CEP_TEL,EV_TEL,E_MAIL,
+DOVIZ_KULLAN,DOVIZ_BIRIMI,ADRESI_1,ILI_1,ILCESI_1, ADRESI_2,KAYDEDEN,AKTIF, SUBE_KODU,
+ADRESI_FATURA,ILI_FATURA,ILCESI_FATURA)
+values
+(@BlKodu,@CustomerCode,current_timestamp,@Name,@Surname, @CompanyName,
+@TaxOffice, @TaxNo, @MobilePhone, @Phone, @Email, @IsCurrency , @CurrencyUnit, @Address,
+@City, @Town, @Address2 ,'Vikaon', @IsActive ,@BranchCode, @Address, @City, @Town)
