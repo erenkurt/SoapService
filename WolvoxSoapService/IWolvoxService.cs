@@ -19,7 +19,7 @@ namespace WolvoxSoapService
         List<SubProduct> GetAllSubProducts();
 
         [OperationContract]
-        List<Stock> GetProductsStock(DateTime date);
+        List<Stock> GetProductsStock(DateTime date); 
 
         [OperationContract]
         bool AddOrder(Order order);
