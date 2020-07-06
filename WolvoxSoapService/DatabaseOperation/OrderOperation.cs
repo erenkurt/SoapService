@@ -74,7 +74,7 @@ namespace WolvoxSoapService.DatabaseOperation
                     firebirdDataProvider.ExeCuteScalar(orderDetailQuery);
                     firebirdDataProvider.ExeCuteScalar("SET GENERATOR SIPARISHR_GEN TO " + Convert.ToInt32(blCode + 1));
                     firebirdDataProvider.FbCommand.Parameters.Clear();
-
+                    //TODO : Stok Hareketi atılacak
                 }
                 catch (Exception exception)
                 {
