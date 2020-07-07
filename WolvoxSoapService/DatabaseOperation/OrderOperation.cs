@@ -74,7 +74,30 @@ namespace WolvoxSoapService.DatabaseOperation
                     firebirdDataProvider.ExeCuteScalar(orderDetailQuery);
                     firebirdDataProvider.ExeCuteScalar("SET GENERATOR SIPARISHR_GEN TO " + Convert.ToInt32(blCode + 1));
                     firebirdDataProvider.FbCommand.Parameters.Clear();
-                    //TODO : Stok Hareketi atılacak
+
+                    string stockMovementSql = "";
+                    int ficheNumber = Convert.ToInt32(firebirdDataProvider.ExeCuteScalar("select MAX(SUBSTRING(EVRAK_NO from 3 for CHAR_LENGTH(EVRAK_NO))) from STOKHR where EVRAK_NO like 'SF%'"));
+                    int tempFicheNumber = ficheNumber + 1;
+                    string ficheNo = "SF" + tempFicheNumber;
+
+                    string mainProductCode = firebirdDataProvider.ExeCuteScalar("select ANA_STOKKODU from STOK  where STOKKODU = '" + detail.ProductCode + "'").ToString();
+
+
+                    int sthrBlCode = Convert.ToInt32(firebirdDataProvider.ExeCuteScalar("select COALESCE(MAX(gen_id(STOKHR_GEN, 0)),0) as Blkodu from STOKHR"));
+
+                    using (StreamReader reader = new StreamReader(System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + "SqlText\\StockMovement.txt"))
+                    {
+                        stockMovementSql = reader.ReadToEnd();
+                        firebirdDataProvider.FbCommand.Parameters.AddWithValue("@EVRAK_NO", ficheNo.PadLeft(3, '0'));
+                        firebirdDataProvider.FbCommand.Parameters.AddWithValue("@ACIKLAMA", detail.ProductName);
+                        firebirdDataProvider.FbCommand.Parameters.AddWithValue("@MIKTARI", detail.Quantity);
+                        firebirdDataProvider.FbCommand.Parameters.AddWithValue("@ANA_STOKKODU", mainProductCode);
+                        firebirdDataProvider.FbCommand.Parameters.AddWithValue("@BLSTKODU", stokRef);
+                        firebirdDataProvider.ExeCuteScalar(stockMovementSql);
+                        firebirdDataProvider.ExeCuteScalar("SET GENERATOR STOKHR_GEN TO " + Convert.ToInt32(sthrBlCode + 1));
+                        firebirdDataProvider.FbCommand.Parameters.Clear();
+
+                    }
                 }
                 catch (Exception exception)
                 {

@@ -68,6 +68,7 @@
     <Content Include="SqlText\Customer.txt" />
     <Content Include="SqlText\OrderDetail.txt" />
     <Content Include="SqlText\OrderFiche.txt" />
+    <Content Include="SqlText\StockMovement.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
