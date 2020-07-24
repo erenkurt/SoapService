@@ -1,4 +1,6 @@
-﻿Insert into STOKHR(BLKODU,BLSTKODU,TUTAR_TURU,TARIHI,EVRAK_NO,ACIKLAMA,MIKTARI,CARIKODU,KPBDVZ,MIKTAR_2,KPB_CMIK,KAYDEDEN,ANA_STOKKODU,KPB_CMIK_M)
+﻿Insert into STOKHR(BLKODU,BLSTKODU,TUTAR_TURU,TARIHI,EVRAK_NO,ACIKLAMA,MIKTARI,CARIKODU,KPBDVZ,MIKTAR_2,KPB_CMIK,KAYDEDEN,ANA_STOKKODU,KPB_CMIK_M,SILINDI,BIRIM_2
+,KPB_FIYATI,KPB_TUTARI
+)
                                           values
                                           ((select max(BLKODU)+1 from STOKHR),@BLSTKODU,0,Extract(month FROM current_date) || '/' || Extract(day FROM current_date) || '/' || Extract(year FROM current_date)
-                                          ,@EVRAK_NO,@ACIKLAMA,@MIKTARI,'CR00001',1,@MIKTARI,@MIKTARI,'Vikaon',@ANA_STOKKODU,@MIKTARI)
+                                          ,@EVRAK_NO,@ACIKLAMA,@MIKTARI,'CR00001',1,@MIKTARI,@MIKTARI,'Vikaon',@ANA_STOKKODU,@MIKTARI,0,'ADET',@KPB_FIYATI,(@KPB_FIYATI * @MIKTARI ))

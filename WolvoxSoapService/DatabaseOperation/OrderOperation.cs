@@ -93,6 +93,8 @@ namespace WolvoxSoapService.DatabaseOperation
                         firebirdDataProvider.FbCommand.Parameters.AddWithValue("@MIKTARI", detail.Quantity);
                         firebirdDataProvider.FbCommand.Parameters.AddWithValue("@ANA_STOKKODU", mainProductCode);
                         firebirdDataProvider.FbCommand.Parameters.AddWithValue("@BLSTKODU", stokRef);
+                        firebirdDataProvider.FbCommand.Parameters.AddWithValue("@KPB_FIYATI", detail.SellingPrice);
+                        
                         firebirdDataProvider.ExeCuteScalar(stockMovementSql);
                         firebirdDataProvider.ExeCuteScalar("SET GENERATOR STOKHR_GEN TO " + Convert.ToInt32(sthrBlCode + 1));
                         firebirdDataProvider.FbCommand.Parameters.Clear();
